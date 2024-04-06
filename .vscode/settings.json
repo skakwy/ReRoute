@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.108.84",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "pi_108",
+            "group": "raspberrys",
+            "password": "reallySafePassword",
+            "username": "laravel",
+            "database": "menuDB"
+        }
+    ]
+}

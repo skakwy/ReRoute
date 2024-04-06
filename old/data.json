@@ -1,0 +1,5 @@
+[
+    {"name":"AdGuard","url":"http://192.168.108.84:5051"},
+    {"name":"IoBroker","url":"http://192.168.108.84:8081"},
+    {"name":"Portainer","url":"http://192.168.108.84:9443"}
+]
