@@ -16,7 +16,7 @@ class MainController extends Controller
         if (Auth::check()) {
             $services = DB::select('select * from service');
 
-            return view('dashBoard');
+            return view('welcome')->with('services', $services);
         }
         else {
             
