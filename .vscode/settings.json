@@ -14,6 +14,21 @@
             "password": "reallySafePassword",
             "username": "laravel",
             "database": "menuDB"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.111.135",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "pi_testing",
+            "group": "raspberrys",
+            "database": "menuDB",
+            "username": "laravel",
+            "password": "reallySafePassword"
         }
     ]
 }
