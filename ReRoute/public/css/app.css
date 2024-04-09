@@ -1,8 +1,10 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 body {
     margin: 0px;
     background-color: #131313;
+    font-family: "Poppins", sans-serif;
 }
 
 #container {
@@ -30,4 +32,94 @@ body {
     color: #E6E6E6;
     font-size: x-large;
     border-radius: 5px;
+    position:relative;
+}
+.popup {    
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 42vh;
+    max-width: 700px;
+    max-height: 400px;
+    background-color: #1C1C1C;
+    position: absolute;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1;
+    
+}
+
+.text {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: white;
+    border-bottom: 1px solid white;
+    font-size: 22px;
+    /* poppins */
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    width: 100%;
+}
+
+button {
+    outline: none;
+    border: none;
+    color: white;
+    background-color: transparent;
+    /* poppins */
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.button {
+    background-color: #131313;
+    padding: 15px 0px;
+    width:100%;
+    border-radius: 5px;
+    box-shadow: none;
+    font-size: 22px;
+}
+
+.cancel_button {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 18px;
+}
+
+.editBtn {
+    width: 40px;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    transition: opacity ease-in-out .3s;
+    background-color: rgb(117, 184, 54);
+    right: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editBtn object {
+    width: 20px;
+    height: 20px;
+
+    
+}
+.checkBox{
+    display: flex;
+    flex-direction:row;
+    color:white;
+    width:70%;
+    gap:10px;
+    justify-content: baseline;
+    align-items: center;
 }

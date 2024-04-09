@@ -1,0 +1,2 @@
+INSERT INTO service (name,url) VALUES ('evcc_106','192.168.108.84:7071');
+INSERT INTO service (name,url) VALUES ('evcc_113','192.168.108.84:7072');
