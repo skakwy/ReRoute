@@ -13,6 +13,9 @@
 
         @foreach ($services as $service)
             <div class="reItem">
+                <div>
+                    <img src="extra/error.svg" />
+                </div>
                 <a style="color: white;text-decoration: none"
                     onclick="window.location.href = '{{ $service->isHttps == true ? 'https:/\/' : 'http:/\/' }}{{ $service->url }}'">{{ $service->name }}</a>
             </div>
@@ -50,11 +53,12 @@
             showPopup();
         })
 
-        function showPopup(name = null, url = null) {
+        function showPopup(name = null, url = null,checked = null) {
             popupOpen = true;
-            if (name != null && url != null) {
+            if (name != null && url != null && checked != null) {
                 document.getElementById("name_field").value = name;
                 document.getElementById("url_field").value = url;
+                document.getElementById("https_field").value = checked;
             }
             popup.style.display = "flex";
 

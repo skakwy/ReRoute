@@ -58,6 +58,29 @@ class MainController extends Controller
         
 
     }
+    public function changeService($oldName, $isHttps = "false", $newName, $newIp){
+        if($isHttps == "true"){
+            $isHttps = 1;
+        }
+        else{
+            $isHttps = 0;
+        }
+        $newIp = str_replace("'","",$newIp);
+        if(Auth::check()){
+            DB::update('update service set name = ?, url = ?, isHttps = ?  where name = ?', [$newName, $newIp,$isHttps, $oldName]);
+        }
+        return redirect('/');
+        
+
+    }
+    public function deleteService($name){
+        if(Auth::check()){
+            DB::delete('delete from service where name = ?', [$name]);
+        }
+        return redirect('/');
+        
+
+    }
     public function cpuUsage(){
         $command = ['bash', '-c', "top -b -n1 | grep \"Cpu(s)\" | awk '{print $2 + $4}'"];
         $process = new Process($command);
