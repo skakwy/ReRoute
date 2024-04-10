@@ -21,6 +21,7 @@
 
     <div id="container">
         <div class="popup" id="popup" style="display: flex;">
+            <div style="width: 80%;display:flex;gap:25px;flex-direction:column">
             <input type="text" id="name_field" class="text" placeholder="Name">
 
             <input type="text" id="password_field" class="text" placeholder="Password">
@@ -28,6 +29,7 @@
             <button class="button" onclick="login()">
                 login
             </button>
+            </div>
 
         </div>
     </div>
