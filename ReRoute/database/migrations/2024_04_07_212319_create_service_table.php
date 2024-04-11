@@ -19,14 +19,14 @@ return new class extends Migration
         });
         DB::table('service')->insert(
             array(
-                'name' => 'evcc_106',
-                'url' => '192.168.108.84:7071'
+                'name' => 'evcc',
+                'url' => $_SERVER['REMOTE_ADDR'] + ":7070"
             )
         );
         DB::table('service')->insert(
             array(
-                'name' => 'evcc_113',
-                'url' => '192.168.108.84:7072'
+                'name' => 'portainer',
+                'url' => $_SERVER['REMOTE_ADDR'] + ":9443"
             )
         );
     }
