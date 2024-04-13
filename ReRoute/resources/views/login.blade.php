@@ -24,7 +24,7 @@
             <div style="width: 80%;display:flex;gap:25px;flex-direction:column">
             <input type="text" id="name_field" class="text" placeholder="Name">
 
-            <input type="text" id="password_field" class="text" placeholder="Password">
+            <input type="password" id="password_field" class="text" placeholder="Password">
             <div class="error">Error logging in</div>
             <button class="button" onclick="login()">
                 login
@@ -33,13 +33,7 @@
 
         </div>
     </div>
-    <script>
-        function login() {
-            var name = document.getElementById('name_field').value;
-            var password = document.getElementById('password_field').value;
-            window.location.href = "/login/" + name + "/" + password;
-        }
-    </script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>

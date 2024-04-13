@@ -39,7 +39,7 @@ return new class extends Migration
         DB::table('users')->insert(
             array(
                 'name' => 'admin',
-                'password' => Hash::make('admin')
+                'password' => Hash::make(getenv("ADMIN_PASSWORD"))
             )
         );
     }

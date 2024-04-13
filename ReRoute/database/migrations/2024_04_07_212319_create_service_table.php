@@ -20,13 +20,14 @@ return new class extends Migration
         DB::table('service')->insert(
             array(
                 'name' => 'evcc',
-                'url' => $_SERVER['REMOTE_ADDR'] + ":7070"
+                'url' => getenv("SERVER_IP") . ":7070"
             )
         );
         DB::table('service')->insert(
             array(
                 'name' => 'portainer',
-                'url' => $_SERVER['REMOTE_ADDR'] + ":9443"
+                'url' => getenv("SERVER_IP") . ":9443",
+                'isHttps' => 1
             )
         );
     }

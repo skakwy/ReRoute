@@ -113,7 +113,12 @@
             @endforeach
             statusWorker.postMessage(services);
             statusWorker.onmessage = (e) => {
-                document.getElementById(e.data).style.opacity = 1;
+                if(e.data[0] == "-"){
+                document.getElementById(e.data.substring(1,e.data.length)).style.opacity = 1;
+                }
+                else{
+                    document.getElementById(e.data.substring(1,e.data.length)).style.opacity = 0;
+                }
             };
         }
     </script>
