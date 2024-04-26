@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 class MainController extends Controller
 {
@@ -78,25 +77,18 @@ class MainController extends Controller
             DB::delete('delete from service where name = ?', [$name]);
         }
         return redirect('/');
-        
-
     }
-    public function cpuUsage(){
-        $command = ['bash', '-c', "top -b -n1 | grep \"Cpu(s)\" | awk '{print $2 + $4}'"];
-        $process = new Process($command);
-        $process->run();
-    
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+    public function dashboard(){
+        if (Auth::check()) {
+            return view('dashBoard');
         }
-        return "CPU Usage: ".$process->getOutput()."%";
-    
-        // if(Auth::check()){
-            
-        // }
-        // else{
-        //     return redirect('/');
-        // }
+        else {
+            return redirect('/login');
+        }
     }
+    public function logout(){
+        Auth::logout();
+        return redirect('/login');
+    }
+  
 }

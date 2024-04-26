@@ -91,18 +91,18 @@
                 let name = document.getElementById("name_field").value;
                 let url = document.getElementById("url_field").value;
                 //console.log("/changeService/" + name + "/'" + url + "'/" + document.getElementById("https_field").checked)
-                window.location.href = "/changeService/" + oldName + "/" + document.getElementById("https_field").checked +
+                window.location.href = "/api/changeService/" + oldName + "/" + document.getElementById("https_field").checked +
                     "/" + name + "/'" + url + "'";
             } else {
 
                 let name = document.getElementById("name_field").value;
                 let url = document.getElementById("url_field").value;
-                window.location.href = "/addService/" + name + "/'" + url + "'/" + document.getElementById("https_field")
+                window.location.href = "/api/addService/" + name + "/'" + url + "'/" + document.getElementById("https_field")
                     .checked;
             }
         }
         function deleteService(){
-            window.location.href = "/deleteService/" + oldName;
+            window.location.href = "/api/deleteService/" + oldName;
         }
         //status check
         if (window.Worker) {

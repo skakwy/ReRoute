@@ -13,5 +13,5 @@
 function login() {
     var name = document.getElementById('name_field').value;
     var password = document.getElementById('password_field').value;
-    window.location.href = "/login/" + name + "/" + password;
+    window.location.href = "/api/login/" + name + "/" + password;
 }
