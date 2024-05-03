@@ -36,21 +36,7 @@
                 }
             }
         });
-        <?php
-        class usageMonitorThread extends Thread {
-            public function run(){
-                while(true){
-                    $cpuUsage = http_get("http://localhost:8080/cpuUsage");
-                    echo "cpuChart.data.labels.push('1');";
-                    echo "cpuChart.data.datasets[0].data.push($cpuUsage);";
-                    echo "cpuChart.update();";
-                    sleep(1);
-                }
-            }
-        }
-        $usageMontor = new usageMonitorThread();
-        $usageMontor->start();
-        ?>
+        
     </script>
 </body>
 

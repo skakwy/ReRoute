@@ -12,7 +12,7 @@ Route::get('/login/{failed?}', [MainController::class, 'loginPage']);
 Route::get('/api/login/{name}/{password}', [MainController::class, 'login']);
 
 //protected routes_____________________
-Route::get('/', [MainController::class, 'index'])->middleware(CheckUserAuth::class);
+Route::get('/', [MainController::class, 'dashboard'])->middleware(CheckUserAuth::class);
 Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(CheckUserAuth::class);
 
 
