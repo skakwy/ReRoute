@@ -12,31 +12,55 @@
 <body>
     <canvas id="cpuChart"></canvas>
     <script>
-        const ctx = document.getElementById('cpuChart');
-
+        const ctx = document.getElementById('cpuChart').getContext('2d');
+        var gradient = ctx.createLinearGradient(0, 0, 0, 100);
+        gradient.addColorStop(0, '#386C3E');   
+        gradient.addColorStop(1, '#161819');
         var cpuChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [],
+                labels: [0,1],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [],
+                    label: 'usage in %',
+                    data: [80,50],
                     borderWidth: 1
                 }]
             },
             options: {
+                scaleBeginAtZero: true,
                 fill: true,
                 plugins: {
                     legend: {
                         display: false,
                     },
                     title: {
-                        display: false,
+                        display: true,
                     }
-                }
+                },
+                /*
+                scales: {
+                    y: {
+                        min:0,
+                        max:100
+                    }
+                },
+                */
+                tension:0.3,
+                responsive:false,
+                pointRadius:0,
+                borderColor:"#8AF437",
+                backgroundColor: gradient
             }
         });
         
+        if (window.Worker) {
+            const statusWorker = new Worker("js/dockerWorker.js");
+            statusWorker.onmessage = function (e) {
+                cpuChart.data.labels.push(e.data.time);
+                cpuChart.data.datasets[0].data.push(e.data.cpu);
+                cpuChart.update();
+            }
+        }
     </script>
 </body>
 
