@@ -12,14 +12,9 @@ class DockerCom extends Controller
    
     public function cpuUsage() 
     {
-        if (Auth::check()) {
-            $linfo = new \Linfo\Linfo;
-            $parser = $linfo->getParser();
-            $cpu = $parser->getCPU();
-            var_dump($cpu);
-            return response(null,200);
-        } else {
-            return response(null, 403);
-        }
+  
+            return response(null,304);
+     
     }
+
 }

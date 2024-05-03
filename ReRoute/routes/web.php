@@ -3,21 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\DockerCom;
+use App\Http\Middleware\CheckUserAuth;
 
 
-Route::get('/', [MainController::class, 'index']);
 
-
+//login not auth protected
 Route::get('/login/{failed?}', [MainController::class, 'loginPage']);
-Route::get('/dashboard', [MainController::class, 'dashboard']);
+Route::get('/api/login/{name}/{password}', [MainController::class, 'login']);
+
+//protected routes_____________________
+Route::get('/', [MainController::class, 'index'])->middleware(CheckUserAuth::class);
+Route::get('/dashboard', [MainController::class, 'dashboard'])->middleware(CheckUserAuth::class);
 
 
 //api
-Route::get('/api/login/{name}/{password}', [MainController::class, 'login']);
-Route::get('/api/logout', [MainController::class, 'logout']);
-Route::get('/api/addService/{name}/{ip}/{isHttps}', [MainController::class, 'addService']);
-Route::get('/api/deleteService/{name}', [MainController::class, 'deleteService']);
-Route::get('/api/changeService/{oldName}/{isHttps}/{newName}/{newURL}', [MainController::class, 'changeService']);
-Route::get('/api/cpuUsage', [DockerCom::class, 'cpuUsage']);
+
+Route::get('/api/logout', [MainController::class, 'logout'])->middleware(CheckUserAuth::class);
+Route::get('/api/addService/{name}/{ip}/{isHttps}', [MainController::class, 'addService'])->middleware(CheckUserAuth::class);
+Route::get('/api/deleteService/{name}', [MainController::class, 'deleteService'])->middleware(CheckUserAuth::class);
+Route::get('/api/changeService/{oldName}/{isHttps}/{newName}/{newURL}', [MainController::class, 'changeService'])->middleware(CheckUserAuth::class);
+Route::get('/api/cpuUsage', [DockerCom::class, 'cpuUsage'])->middleware(CheckUserAuth::class);
 
 ?>

@@ -3,24 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-
 
 class MainController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
+     
             $services = DB::select('select * from service');
 
             return view('welcome')->with('services', $services);
-        }
-        else {
-            
-            return redirect('/login');
-        }
     }
     public function login($name,$password){
         $user = DB::select('select id, password from users where name = ?', [$name]);
@@ -50,9 +44,8 @@ class MainController extends Controller
             $isHttps = 0;
         }
         $ip = str_replace("'","",$ip);
-        if(Auth::check()){
+  
             DB::insert('insert into service (name, url, isHttps) values (?, ?, ?)', [$name, $ip, $isHttps]);
-        }
         return redirect('/');
         
 
@@ -65,26 +58,23 @@ class MainController extends Controller
             $isHttps = 0;
         }
         $newIp = str_replace("'","",$newIp);
-        if(Auth::check()){
+     
             DB::update('update service set name = ?, url = ?, isHttps = ?  where name = ?', [$newName, $newIp,$isHttps, $oldName]);
-        }
+    
         return redirect('/');
         
 
     }
     public function deleteService($name){
-        if(Auth::check()){
+
             DB::delete('delete from service where name = ?', [$name]);
-        }
+        
         return redirect('/');
     }
     public function dashboard(){
-        if (Auth::check()) {
+    
             return view('dashBoard');
-        }
-        else {
-            return redirect('/login');
-        }
+ 
     }
     public function logout(){
         Auth::logout();
