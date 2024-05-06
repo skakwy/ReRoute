@@ -1,0 +1,51 @@
+FROM php:8.3.6-apache
+RUN apt-get update 
+RUN apt-get install -y git
+RUN apt-get install -y libzip-dev
+RUN apt-get install -y unzip
+RUN apt-get install -y openssl
+RUN apt-get install -y npm
+ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN install-php-extensions zip 
+RUN install-php-extensions 
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN echo 'root:Docker!' | chpasswd
+
+#configure database for laravel and ssl
+RUN mkdir -p /safeData/ssl && \
+    chmod 777 /safeData 
+
+ENV LARAVEL_DATABASE_FILE=/safeData/laravel.db
+#login password for admin
+ENV ADMIN_PASSWORD="admin"
+
+#RUN cd / && git clone -b dockerControl https://github.com/skakwy/ReRoute.git #pull dockerControl branch
+RUN cd / && git clone https://github.com/skakwy/ReRoute.git 
+RUN rm -rf /var/www/html/ && mv /ReRoute /var/www/html/
+
+#copy update script
+COPY checkForUpdate.sh /var/www/html/checkForUpdate.sh
+RUN chmod +x /var/www/html/checkForUpdate.sh
+
+RUN chgrp -R www-data /var/www/html/ReRoute/
+RUN chmod -R 775 /var/www/html/ReRoute/storage
+COPY laravel_project.conf /etc/apache2/sites-available/laravel_project.conf
+
+RUN a2dissite 000-default.conf
+RUN a2ensite laravel_project
+RUN a2enmod rewrite
+#configure ssl for apache
+#RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+
+RUN 
+#enable ssl
+RUN a2enmod ssl
+RUN a2ensite default-ssl
+
+
+EXPOSE 80
+COPY startup.sh /startup.sh
+RUN chmod +x /startup.sh
+CMD ["/startup.sh"]

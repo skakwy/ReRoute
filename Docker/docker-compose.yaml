@@ -1,0 +1,11 @@
+version: '0.1'
+services:
+  reroute:
+    image: reroute
+    ports:
+      - "80:80"
+    volumes:
+      - "/var/run/docker.sock:/app/docker.sock"
+      - "mysqlData:/var/lib/mysql"
+    environment:
+      - ADMIN_PASSWORD=admin
