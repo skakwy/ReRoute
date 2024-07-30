@@ -26,6 +26,9 @@
                 </div>
             </div>
         @endforeach
+        <div class="reItem" id="updateEvcc">
+            Update Evcc
+        </div>
         <div class="reItem" id="addButton" style="background-color: transparent;">
             Add
         </div>
@@ -57,6 +60,10 @@
         let popup = document.getElementById("popup");
         var popupOpen = false;
         var oldName;
+
+        document.getElementById("updateEvcc").addEventListener("click", () => {
+            window.location.href = "/updateEvcc";
+        })
 
         document.getElementById("addButton").addEventListener("click", () => {
             showPopup();

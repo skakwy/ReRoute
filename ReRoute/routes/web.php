@@ -8,6 +8,7 @@ Route::get('/', [MainController::class, 'index']);
 
 Route::get('/login/{name}/{password}', [MainController::class, 'login']);
 Route::get('/login/{failed?}', [MainController::class, 'loginPage']);
+Route::get('/updateEvcc', [MainController::class, 'updateEvcc']);
 
 
 //api
