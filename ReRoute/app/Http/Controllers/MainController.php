@@ -98,18 +98,25 @@ class MainController extends Controller
     }
     public function updateEvcc()
     {
+        //NOT DOCKER
         if (Auth::check()) {
             //TODO: get port from database
-            $port = 7070;
-            $command = ['bash', '-c', "sudo docker run -d --network=host -p $port:7070 -p 7090:7090/udp -p 8887:8887 -p 9522:9522/udp --name evcc --restart=always -v /home/pi/evcc/etc/evcc.yaml:/etc/evcc.yaml -v /home/pi/evcc/data:/root/.evcc --restart=always evcc/evcc:latest"];
+            $port = 7071;
+            //$command = ['bash', '-c', "docker run -d --network=host -p $port:7071 -p 7090:7090/udp -p 8887:8887 -p 9522:9522/udp --name evcc_106 --restart=always -v /home/pi/evcc/etc/evcc.yaml:/etc/evcc.yaml -v /home/pi/evcc/data:/root/.evcc --restart=always evcc/evcc:latest"];
+            //use docker socket to update 
+            $command = ['bash','-c',"curl --unix-socket /var/run/docker.sock http://localhost/containers/evcc_106/json"];
             $process = new Process($command);
             $process->run();
+           
 
             // executes after the command finishes
             if (!$process->isSuccessful()) {
                 return new ProcessFailedException($process);
-                
+        
             }
+         
+            $container_data = json_decode($process->getOutput());
+            echo $process->getOutput();
           
             //redirect('/');
 
